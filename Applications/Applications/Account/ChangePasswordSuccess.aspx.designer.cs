@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Applications.Account
+namespace ApplicationsMir.Account
 {
 
 

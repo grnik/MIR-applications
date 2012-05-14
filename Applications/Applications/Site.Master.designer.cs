@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Applications
+namespace ApplicationsMir
 {
 
 

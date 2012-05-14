@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ApplicationsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ApplicationsModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="ApplicationsModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employees" EntityType="ApplicationsModel.Store.Employees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="ApplicationsModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Applications_Employees" Association="ApplicationsModel.Store.FK_Applications_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Status" Association="ApplicationsModel.Store.FK_Applications_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Creating" Type="datetime" Nullable="false" />
+          <Property Name="Who" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Room" Type="int" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Login" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="Problem" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Applications_Employees">
+          <End Role="Employees" Type="ApplicationsModel.Store.Employees" Multiplicity="0..1" />
+          <End Role="Applications" Type="ApplicationsModel.Store.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Status">
+          <End Role="Status" Type="ApplicationsModel.Store.Status" Multiplicity="1" />
+          <End Role="Applications" Type="ApplicationsModel.Store.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ApplicationsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ApplicationsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="ApplicationsModel.Applications" />
+          <EntitySet Name="Employees" EntityType="ApplicationsModel.Employees" />
+          <EntitySet Name="Status" EntityType="ApplicationsModel.Status" />
+          <AssociationSet Name="FK_Applications_Employees" Association="ApplicationsModel.FK_Applications_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Status" Association="ApplicationsModel.FK_Applications_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <Property Name="Creating" Type="DateTime" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <Property Name="Who" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Room" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="Problem" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Employees" Relationship="ApplicationsModel.FK_Applications_Employees" FromRole="Applications" ToRole="Employees" />
+          <NavigationProperty Name="Status" Relationship="ApplicationsModel.FK_Applications_Status" FromRole="Applications" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Applications" Relationship="ApplicationsModel.FK_Applications_Employees" FromRole="Employees" ToRole="Applications" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Applications" Relationship="ApplicationsModel.FK_Applications_Status" FromRole="Status" ToRole="Applications" />
+        </EntityType>
+        <Association Name="FK_Applications_Employees">
+          <End Role="Employees" Type="ApplicationsModel.Employees" Multiplicity="0..1" />
+          <End Role="Applications" Type="ApplicationsModel.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Status">
+          <End Role="Status" Type="ApplicationsModel.Status" Multiplicity="1" />
+          <End Role="Applications" Type="ApplicationsModel.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ApplicationsModelStoreContainer" CdmEntityContainer="ApplicationsEntities">
+          <EntitySetMapping Name="Applications"><EntityTypeMapping TypeName="ApplicationsModel.Applications"><MappingFragment StoreEntitySet="Applications">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Creating" ColumnName="Creating" />
+            <ScalarProperty Name="Who" ColumnName="Who" />
+            <ScalarProperty Name="Room" ColumnName="Room" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="Login" ColumnName="Login" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            <ScalarProperty Name="Problem" ColumnName="Problem" />
+            <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+            <ScalarProperty Name="Comment" ColumnName="Comment" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Employees"><EntityTypeMapping TypeName="ApplicationsModel.Employees"><MappingFragment StoreEntitySet="Employees">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Status"><EntityTypeMapping TypeName="ApplicationsModel.Status"><MappingFragment StoreEntitySet="Status">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MainModel">
+        <EntityTypeShape EntityType="ApplicationsModel.Applications" Width="1.5" PointX="3" PointY="1" Height="3.0714322916666661" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplicationsModel.Employees" Width="1.5" PointX="0.75" PointY="1.75" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplicationsModel.Status" Width="1.5" PointX="0.75" PointY="5.75" Height="1.4279589843749996" IsExpanded="true" />
+        <AssociationConnector Association="ApplicationsModel.FK_Applications_Employees" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.4639794921875" />
+          <ConnectorPoint PointX="3" PointY="2.4639794921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="ApplicationsModel.FK_Applications_Status" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.4639794921875" />
+          <ConnectorPoint PointX="3.75" PointY="6.4639794921875" />
+          <ConnectorPoint PointX="3.75" PointY="4.0714322916666656" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
