@@ -58,6 +58,9 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Register\ApplicationNew.aspx" />
+    <Content Include="Register\EmployeeNew.aspx" />
+    <Content Include="Register\Employees.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -121,10 +124,33 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Entity\Applications.cs" />
+    <Compile Include="Entity\Employees.cs" />
+    <Compile Include="Entity\Status.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register\ApplicationNew.aspx.cs">
+      <DependentUpon>ApplicationNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register\ApplicationNew.aspx.designer.cs">
+      <DependentUpon>ApplicationNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register\EmployeeNew.aspx.cs">
+      <DependentUpon>EmployeeNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register\EmployeeNew.aspx.designer.cs">
+      <DependentUpon>EmployeeNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register\Employees.aspx.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register\Employees.aspx.designer.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

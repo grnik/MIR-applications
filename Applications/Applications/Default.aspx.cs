@@ -11,16 +11,24 @@ namespace ApplicationsMir
 {
     public partial class _Default : System.Web.UI.Page
     {
-        private List<Applications> applications;
+        private List<ApplicationsMir.DAL.Applications> applications;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
             {
-                //EntityDataSource dataSource = new EntityDataSource(new EntityConnection("name=ApplicationsEntities"));
+                //EmployeeDataSource dataSource = new EmployeeDataSource(new EntityConnection("name=ApplicationsEntities"));
                 using(ApplicationsEntities applicationsEntities = new ApplicationsEntities("name=ApplicationsEntities"))
                 {
-                    applications = applicationsEntities.Applications.ToList();
+                    applications = applicationsEntities.Applications.Include("Employees").Include("Status").ToList();
+
+                    foreach (var application in applications)
+                    {
+                        string nameEmployee = application.Employees.Name;
+                    }
+
+                    grdListAppl.DataSource = applications;
+                    grdListAppl.DataBind();
                 }
             }
         }
